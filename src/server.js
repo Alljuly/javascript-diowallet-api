@@ -1,13 +1,17 @@
 import express, { json } from "express";
 import authRouter from "./routes/authRoutes.js";
+import { connectDB } from "./config/database.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
-const port = 5000;
+connectDB();
 
 app.use(json());
 app.use(authRouter);
 
-app.listen(port, () => {
-  console.log(`Server is running on ${port}`);
-});
+const port = process.env.PORT;
+
+app.listen(port, () => console.log(`Server is running on ${port}`));
