@@ -10,4 +10,10 @@ transactionRouter.post(
   transactionController.create
 );
 
+transactionRouter.get(
+  "/transactions",
+  authMiddleware,
+  transactionController.findAllbyUser
+);
+
 export default transactionRouter;

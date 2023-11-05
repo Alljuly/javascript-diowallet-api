@@ -12,4 +12,15 @@ async function create(req, res) {
   }
 }
 
-export default { create };
+async function findAllbyUser(req, res) {
+  const { _id: id } = res.locals.user;
+
+  try {
+    const transaction = await transactionService.findAllbyUser(id);
+    return res.send(transaction);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+}
+
+export default { create, findAllbyUser };
