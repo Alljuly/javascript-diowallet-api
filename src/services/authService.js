@@ -11,6 +11,17 @@ async function signup(body) {
   return await authRepository.create({ ...body, password: hashPassword });
 }
 
+async function signin(body) {
+  const userExists = await authRepository.findByEmail(body.email);
+  if (!userExists) throw new Error("Email or password incorrect!");
+
+  const passwordOk = bcrypt.compareSync(body.password, userExists.password);
+  if (!passwordOk) throw new Error("Email or password incorrect!");
+
+  return authRepository.generateToken(userExists._id);
+}
+
 export default {
   signup,
+  signin,
 };
