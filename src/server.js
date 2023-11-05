@@ -2,6 +2,7 @@ import express, { json } from "express";
 import authRouter from "./routes/authRoutes.js";
 import { connectDB } from "./config/database.js";
 import dotenv from "dotenv";
+import transactionRouter from "./routes/transactionRoutes.js";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ connectDB();
 
 app.use(json());
 app.use(authRouter);
+app.use(transactionRouter);
 
 const port = process.env.PORT;
 
