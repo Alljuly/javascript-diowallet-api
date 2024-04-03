@@ -3,8 +3,8 @@ export function validationSchemaMiddleware(schema) {
     const { error } = schema.validate(req.body, { abortEarly: false });
 
     if (error) {
-      const erros = error.details.map((detail) => detail.message);
-      return res.status(422).send(erros);
+      const errors = error.details.map((detail) => detail.message);
+      return res.status(422).send(errors);
     }
 
     next();
